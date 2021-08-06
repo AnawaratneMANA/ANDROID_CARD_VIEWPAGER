@@ -2,27 +2,10 @@ package com.example.swipeactivity;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.PersistableBundle;
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import com.example.swipeactivity.databinding.ActivityMainBinding;
-
 import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity {
 
     private ActionBar actionBar;
