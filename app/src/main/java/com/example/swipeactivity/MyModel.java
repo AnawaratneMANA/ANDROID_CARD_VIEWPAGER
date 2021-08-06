@@ -1,11 +1,12 @@
 package com.example.swipeactivity;
 
 public class MyModel {
-    String title, description;
+    String title, description, date;
     int image;
 
-    public MyModel(String title, String description, int image) {
+    public MyModel(String title, String description, int image, String date) {
         this.title = title;
+        this.date = date;
         this.description = description;
         this.image = image;
     }
@@ -13,9 +14,17 @@ public class MyModel {
     public String getTitle() {
         return title;
     }
+    public String getDate() {
+        return date;
+    }
+
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getDescription() {
