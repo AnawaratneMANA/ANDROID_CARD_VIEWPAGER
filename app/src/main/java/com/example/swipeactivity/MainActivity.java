@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
+    //This import should be androidx
     private ActionBar actionBar;
 
     //Registering UI Views
