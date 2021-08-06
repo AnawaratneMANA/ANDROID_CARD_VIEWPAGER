@@ -4,7 +4,7 @@ public class MyModel {
     String title, description, date;
     int image;
 
-    public MyModel(String title, String description, int image, String date) {
+    public MyModel(String title, String description, String date, int image) {
         this.title = title;
         this.date = date;
         this.description = description;

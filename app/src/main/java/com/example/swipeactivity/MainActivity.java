@@ -4,39 +4,83 @@ import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.PersistableBundle;
 import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.swipeactivity.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+    private ActionBar actionBar;
+
+    //Registering UI Views
+    private ViewPager viewPage;
+
+    private ArrayList<MyModel> modelArrayList;
+    private MyAdapter myAdapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        //init actionbar
+        actionBar = getSupportActionBar();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        //init UI views
+        viewPage = findViewById(R.id.viewPager);
+        loadCards();
+
+        //Set ViewPager Change Listener
+        viewPage.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                String title = modelArrayList.get(position).getTitle();
+                actionBar.setTitle(title);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void loadCards() {
+        //init list
+        modelArrayList = new ArrayList<>();
+        modelArrayList.add(new MyModel("Android Image", "Description 01", "3/8/2020",R.drawable.image1));
+        modelArrayList.add(new MyModel("Second Image", "Description 01", "3/8/2020",R.drawable.image2));
+        modelArrayList.add(new MyModel("Third Image", "Description 01", "3/8/2020",R.drawable.image3));
+        modelArrayList.add(new MyModel("Fourth Image", "Description 01", "3/8/2020",R.drawable.image4));
+        modelArrayList.add(new MyModel("Fifth Image", "Description 01", "3/8/2020",R.drawable.image5));
+
+        //Setting the adapter
+        myAdapter = new MyAdapter(this, modelArrayList);
+        //Set adapter to view page.
+        viewPage.setAdapter(myAdapter);
+        //Set Default padding from left/ right
+        viewPage.setPadding(100, 0, 100, 0);
 
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }
